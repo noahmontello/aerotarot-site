@@ -1,353 +1,308 @@
-const steps = [
+import Link from "next/link";
+import { HomeLaunchOverlay } from "./_components/home-launch";
+import {
+  ParallaxLayer,
+  ScrollReveal,
+} from "./_components/home-scroll";
+import {
+  MarketingPage,
+  SectionIntro,
+  WaitlistCard,
+  displayFontClass,
+  features,
+  steps,
+} from "./_components/marketing";
+
+const brandDetails = [
   {
-    number: "01",
-    title: "Draw your cards",
-    description:
-      "Begin with the AeroTarot deck and let the tactile ritual shape the energy of your reading.",
+    title: "Premium objects",
+    body: "AeroTarot is being shaped as a collectible physical experience first, with presence, tactility, and care in the product itself.",
   },
   {
-    number: "02",
-    title: "Scan or connect them",
-    description:
-      "Link the physical spread to the app in seconds, preserving every card and position with clarity.",
+    title: "Connected ritual",
+    body: "NFC-enabled cards and a companion app extend each reading without flattening the mystery that makes tarot meaningful.",
   },
   {
-    number: "03",
-    title: "Receive AI-powered interpretation",
-    description:
-      "Get thoughtful guidance that blends symbolic depth, pattern recognition, and your personal context.",
+    title: "Designed memory",
+    body: "The digital layer is there to help people revisit readings, notice patterns, and build a quieter archive of insight over time.",
   },
 ] as const;
 
-const features = [
+const earlyInterest = [
   {
-    title: "Physical + digital experience",
-    description:
-      "A grounded ritual in your hands, expanded by a digital layer designed to feel seamless and intentional.",
+    audience: "Collectors",
+    signal:
+      "Drawn to the object quality of the deck and the idea of limited connected releases.",
   },
   {
-    title: "Personalized readings",
-    description:
-      "Interpretations adapt to your spread, your history, and the questions that keep returning.",
+    audience: "Readers",
+    signal:
+      "Interested in a tarot experience that keeps ritual central while giving interpretation more continuity.",
   },
   {
-    title: "Journal & track insights",
-    description:
-      "Save readings, revisit themes, and notice the patterns that emerge across time.",
+    audience: "Design-minded spiritual practice",
+    signal:
+      "Responding to a version of tarot that feels modern, restrained, and emotionally grounded rather than loud or gimmicky.",
   },
 ] as const;
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden bg-black text-white">
-      <BackgroundAura />
-      <div className="relative">
-        <Hero />
-        <HowItWorks />
-        <Features />
-        <DeckSection />
-        <WaitlistSection />
-        <Footer />
-      </div>
-    </main>
-  );
-}
-
-const displayFontClass =
-  "[font-family:'Iowan_Old_Style','Palatino_Linotype','Book_Antiqua','Times_New_Roman',serif]";
-
-function Hero() {
-  return (
-    <section className="relative isolate min-h-screen">
-      <div className="mx-auto grid min-h-screen w-full max-w-7xl items-center gap-16 px-6 py-16 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:px-12">
-        <div className="max-w-xl self-center pt-12 sm:pt-16 lg:pt-10">
-          <p className="mb-5 text-[0.68rem] uppercase tracking-[0.42em] text-white/55">
-            AeroTarot
-          </p>
-          <h1
-            className={`${displayFontClass} max-w-lg text-5xl leading-none font-medium tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl`}
-          >
-            Tarot, reimagined through technology.
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-7 text-white/70 sm:text-lg">
-            AeroTarot pairs the ritual of physical cards with a luminous digital
-            layer, turning every draw into a deeper, more personal source of
-            insight.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a
-              href="#waitlist"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-amber-200/35 bg-[linear-gradient(135deg,rgba(255,233,173,0.26),rgba(149,110,255,0.24))] px-6 text-sm font-medium tracking-[0.2em] uppercase text-white transition duration-300 hover:border-amber-100/60 hover:bg-[linear-gradient(135deg,rgba(255,233,173,0.36),rgba(149,110,255,0.3))]"
-            >
-              Join the Waitlist
-            </a>
-            <p className="text-sm leading-6 text-white/45">
-              Crafted for seekers who want ritual, memory, and meaning in one
-              experience.
+    <MarketingPage current="home">
+      <HomeLaunchOverlay />
+      <section className="relative -mt-16 overflow-hidden pt-16">
+        <div className="absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_22%_24%,rgba(121,77,255,0.18),transparent_22%),radial-gradient(circle_at_74%_30%,rgba(244,196,110,0.1),transparent_16%),radial-gradient(circle_at_58%_68%,rgba(84,48,189,0.12),transparent_20%)]" />
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-18 sm:px-8 sm:py-22 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,0.9fr)] lg:px-12 lg:py-26">
+          <ParallaxLayer speed={0.08} className="max-w-2xl self-center">
+            <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
+              Physical ritual. Digital depth.
             </p>
-          </div>
-        </div>
-
-        <div className="relative mx-auto flex w-full max-w-md items-center justify-center py-6 lg:max-w-none lg:justify-end">
-          <div className="absolute inset-x-10 top-8 h-40 rounded-full bg-[radial-gradient(circle,rgba(246,200,112,0.26),transparent_70%)] blur-3xl" />
-          <div className="absolute bottom-4 right-10 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(116,71,255,0.28),transparent_72%)] blur-3xl" />
-
-          <div className="relative h-[26rem] w-full max-w-[24rem] sm:h-[31rem] sm:max-w-[28rem]">
-            <div className="absolute inset-[14%_8%_8%_18%] rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm" />
-            <div className="absolute inset-0 rounded-[2.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.01))] shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_40px_120px_rgba(0,0,0,0.7)]" />
-            <div className="absolute left-[10%] top-[8%] h-[78%] w-[38%] rounded-[1.8rem] border border-amber-100/20 bg-[linear-gradient(180deg,rgba(24,18,40,0.98),rgba(8,8,12,0.98))] p-3 shadow-[0_25px_60px_rgba(0,0,0,0.55)]">
-              <TarotCard />
-            </div>
-            <div className="absolute left-[33%] top-[17%] h-[78%] w-[38%] rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,15,32,0.95),rgba(6,6,10,0.96))] p-3 shadow-[0_30px_70px_rgba(0,0,0,0.58)]" />
-            <div className="absolute left-[56%] top-[26%] h-[78%] w-[38%] rounded-[1.8rem] border border-white/12 bg-[linear-gradient(180deg,rgba(26,20,46,0.98),rgba(7,7,10,0.98))] p-3 shadow-[0_35px_80px_rgba(0,0,0,0.62)]">
-              <AppPanel />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HowItWorks() {
-  return (
-    <section className="border-t border-white/8 px-6 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-7xl">
-        <SectionIntro
-          eyebrow="How it works"
-          title="A ritual that begins in your hands and unfolds with intelligent guidance."
-          body="Every reading keeps the tactile beauty of the deck while adding a calm, modern interpretation flow."
-        />
-        <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="border-t border-white/12 pt-5 md:pt-6"
+            <h1
+              className={`${displayFontClass} mt-6 max-w-4xl text-5xl leading-[0.92] font-medium tracking-[-0.045em] text-white sm:text-6xl lg:text-[5.6rem]`}
             >
-              <p className="text-xs tracking-[0.35em] text-amber-100/55 uppercase">
-                {step.number}
-              </p>
-              <h3 className="mt-4 text-2xl font-medium text-white">
-                {step.title}
-              </h3>
-              <p className="mt-3 max-w-sm text-sm leading-7 text-white/62 sm:text-base">
-                {step.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+              Tarot, reimagined through technology.
+            </h1>
+            <p className="mt-8 max-w-xl text-base leading-8 text-white/68 sm:text-lg">
+              AeroTarot pairs the intimacy of a premium physical deck with a
+              calm digital layer that captures, interprets, and remembers your
+              readings.
+            </p>
+            <p className="mt-5 max-w-lg text-sm leading-7 text-amber-100/48 sm:text-base">
+              A darker, more luminous reading experience where every card feels
+              like an object of ceremony and every interpretation feels drawn
+              from a hidden pattern rather than a screen.
+            </p>
 
-function Features() {
-  return (
-    <section className="px-6 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-        <SectionIntro
-          eyebrow="Features"
-          title="Designed to feel intimate, insightful, and quietly powerful."
-          body="AeroTarot combines premium objects and thoughtful software without losing the mystery that makes tarot meaningful."
-        />
-
-        <div className="space-y-8">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="border-t border-white/10 pt-5 sm:pt-6"
-            >
-              <h3 className="text-xl font-medium text-white sm:text-2xl">
-                {feature.title}
-              </h3>
-              <p className="mt-3 max-w-xl text-sm leading-7 text-white/62 sm:text-base">
-                {feature.description}
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <Link
+                href="/waitlist"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-amber-200/35 bg-[linear-gradient(135deg,rgba(255,233,173,0.24),rgba(149,110,255,0.22))] px-6 text-sm font-medium uppercase tracking-[0.2em] text-white transition duration-300 hover:border-amber-100/60 hover:bg-[linear-gradient(135deg,rgba(255,233,173,0.34),rgba(149,110,255,0.3))]"
+              >
+                Join the Waitlist
+              </Link>
+              <p className="text-sm leading-6 text-white/42">
+                Crafted for people who want ritual, memory, and meaning in one
+                experience.
               </p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function DeckSection() {
-  return (
-    <section className="px-6 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-7xl gap-12 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] px-6 py-8 shadow-[0_35px_120px_rgba(0,0,0,0.55)] sm:px-8 sm:py-10 lg:grid-cols-[minmax(280px,0.9fr)_minmax(0,1.1fr)] lg:px-10">
-        <div className="relative min-h-80">
-          <div className="absolute inset-x-6 top-10 h-24 rounded-full bg-[radial-gradient(circle,rgba(243,198,102,0.25),transparent_72%)] blur-3xl" />
-          <div className="absolute left-4 top-12 h-64 w-44 rounded-[1.8rem] border border-amber-100/22 bg-[linear-gradient(180deg,rgba(21,17,34,0.98),rgba(8,8,12,0.99))] p-3 shadow-[0_25px_70px_rgba(0,0,0,0.65)] sm:left-10">
-            <TarotCard />
-          </div>
-          <div className="absolute right-5 top-24 h-64 w-44 rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,12,27,0.96),rgba(7,7,10,0.98))] shadow-[0_25px_80px_rgba(0,0,0,0.65)] sm:right-10" />
-        </div>
+            <div className="mt-12 grid max-w-3xl gap-4 text-sm text-white/48 sm:grid-cols-3 sm:gap-4">
+              <span className="rounded-full border border-white/8 bg-white/[0.02] px-4 py-3">
+                Premium physical deck
+              </span>
+              <span className="rounded-full border border-white/8 bg-white/[0.02] px-4 py-3">
+                Companion interpretation app
+              </span>
+              <span className="rounded-full border border-white/8 bg-white/[0.02] px-4 py-3">
+                Private journal of readings
+              </span>
+            </div>
+          </ParallaxLayer>
 
-        <div className="self-center">
-          <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
-            The deck
-          </p>
-          <h2
-            className={`${displayFontClass} mt-4 max-w-xl text-4xl leading-tight font-medium tracking-[-0.03em] text-white sm:text-5xl`}
+          <ParallaxLayer
+            speed={0.14}
+            className="relative flex items-center justify-center lg:justify-end"
           >
-            A premium deck built as a ritual object, then extended into the app.
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-white/68">
-            AeroTarot is designed with a collector’s sensibility: tactile
-            finishes, intentional symbolism, and a presence that feels worthy of
-            daily ritual. Each deck is made to work beautifully on its own, then
-            connect effortlessly with the AeroTarot app for richer,
-            AI-assisted interpretation.
-          </p>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-white/52">
-            The result is a product that feels luxurious on the table and
-            intelligent in motion, keeping the mystique of tarot while opening a
-            more personal, modern reading experience.
-          </p>
+            <div className="absolute left-8 top-6 h-52 w-52 rounded-full bg-[radial-gradient(circle,rgba(116,71,255,0.42),transparent_72%)] blur-3xl" />
+            <div className="absolute bottom-16 right-4 h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(241,194,111,0.2),transparent_72%)] blur-3xl" />
+
+            <div className="relative h-[27rem] w-full max-w-[24rem] sm:h-[31rem] sm:max-w-[28rem]">
+              <div className="absolute inset-[7%_4%_4%_9%] rounded-[2.4rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.008))] shadow-[0_40px_120px_rgba(0,0,0,0.62)]" />
+              <div className="absolute inset-[4%_5%_5%_10%] rounded-[2.25rem] border border-white/6" />
+              <div className="absolute left-[11%] top-[11%] h-[72%] w-[31%] rounded-[1.9rem] border border-amber-100/20 bg-[linear-gradient(180deg,rgba(17,14,30,1),rgba(7,7,11,1))] shadow-[0_30px_70px_rgba(0,0,0,0.68)]" />
+              <div className="absolute left-[31%] top-[19%] h-[70%] w-[31%] rounded-[1.9rem] border border-white/8 bg-[linear-gradient(180deg,rgba(16,13,28,0.98),rgba(7,7,10,1))] shadow-[0_30px_70px_rgba(0,0,0,0.64)]" />
+              <div className="absolute left-[51%] top-[27%] h-[68%] w-[31%] rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(24,19,42,0.98),rgba(9,9,12,1))] shadow-[0_30px_70px_rgba(0,0,0,0.62)]" />
+              <div className="absolute left-[14%] top-[17%] h-[58%] w-[21%] rounded-[1.2rem] border border-white/10 bg-[radial-gradient(circle_at_50%_34%,rgba(136,94,255,0.8),transparent_24%),radial-gradient(circle_at_50%_34%,rgba(247,211,129,0.22),transparent_14%),linear-gradient(180deg,rgba(18,12,34,0.98),rgba(8,8,12,1))]" />
+              <div className="absolute left-[17%] top-[23%] h-[29%] w-[1px] bg-white/18" />
+              <div className="absolute left-[14%] top-[18%] text-[0.58rem] uppercase tracking-[0.34em] text-amber-100/48">
+                Arc I
+              </div>
+              <div className="absolute left-[14%] top-[63%] text-[0.58rem] uppercase tracking-[0.34em] text-white/34">
+                The Veil
+              </div>
+              <div className="absolute left-[18%] top-[33%] h-[20%] w-[10%] rounded-full border border-white/10" />
+              <div className="absolute left-[21%] top-[39%] h-[1px] w-[4.5%] bg-white/18" />
+              <div className="absolute left-[23%] top-[33%] h-[20%] w-[1px] bg-white/16" />
+              <div className="absolute left-[12%] top-[7%] h-[82%] w-[76%] rounded-[2rem] border border-white/6" />
+              <div className="absolute right-[13%] top-[15%] h-[44%] w-[44%] rounded-full border border-white/8" />
+              <div className="absolute right-[22%] top-[23%] h-[28%] w-[28%] rounded-full border border-white/6" />
+              <div className="absolute right-[19%] top-[36%] h-[1px] w-[10%] bg-white/10" />
+              <div className="absolute right-[24%] top-[47%] h-[1px] w-[7%] bg-white/10" />
+              <div className="absolute right-[33%] top-[54%] h-[8%] w-[8%] rounded-full border border-white/6" />
+              <div className="absolute inset-x-[15%] bottom-[8%] flex items-end justify-between border-t border-white/10 pt-5">
+                <div>
+                  <p className="text-[0.62rem] uppercase tracking-[0.34em] text-white/35">
+                    AeroTarot
+                  </p>
+                  <p className="mt-2 text-base text-white/82">
+                    A more luminous reading ritual
+                  </p>
+                </div>
+                <div className="rounded-full border border-amber-100/18 bg-amber-100/8 px-4 py-2 text-[0.62rem] uppercase tracking-[0.28em] text-amber-100/70">
+                  NFC
+                </div>
+              </div>
+            </div>
+          </ParallaxLayer>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function WaitlistSection() {
-  return (
-    <section id="waitlist" className="px-6 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.015))] px-6 py-10 text-center shadow-[0_30px_120px_rgba(0,0,0,0.5)] sm:px-10">
-        <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
-          Waitlist
-        </p>
-        <h2
-          className={`${displayFontClass} mt-4 text-4xl leading-tight font-medium tracking-[-0.03em] text-white sm:text-5xl`}
-        >
-          Be first to experience the next chapter of tarot.
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/65">
-          Join the list for early access, product updates, and launch news as
-          AeroTarot comes to life.
-        </p>
-
-        <form className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row">
-          <label htmlFor="email" className="sr-only">
-            Email address
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            className="min-h-12 flex-1 rounded-full border border-white/12 bg-black/55 px-5 text-base text-white outline-none transition placeholder:text-white/28 focus:border-amber-100/45"
+      <section className="border-t border-white/8 px-6 py-20 sm:px-8 lg:px-12">
+        <ScrollReveal className="mx-auto max-w-7xl">
+          <SectionIntro
+            eyebrow="How it works"
+            title="A ritual that begins in the hand and opens into a more luminous reading."
+            body="Each draw keeps the gravity of the physical spread while the digital layer reveals continuity, symbolism, and a quieter form of interpretation."
           />
-          <button
-            type="submit"
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-amber-200/30 bg-[linear-gradient(135deg,rgba(255,231,173,0.24),rgba(124,92,255,0.22))] px-6 text-sm font-medium uppercase tracking-[0.2em] text-white transition duration-300 hover:border-amber-100/55 hover:bg-[linear-gradient(135deg,rgba(255,231,173,0.34),rgba(124,92,255,0.3))]"
-          >
-            Join the Waitlist
-          </button>
-        </form>
-      </div>
-    </section>
-  );
-}
+          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+            {steps.map((step, index) => (
+              <ScrollReveal
+                key={step.number}
+                delay={index * 110}
+                className="border-t border-white/12 pt-5 md:pt-6"
+              >
+                <p className="text-xs tracking-[0.35em] uppercase text-amber-100/55">
+                  {step.number}
+                </p>
+                <h3 className="mt-4 text-2xl font-medium text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-3 max-w-sm text-sm leading-7 text-white/62 sm:text-base">
+                  {step.description}
+                </p>
+              </ScrollReveal>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
 
-function Footer() {
-  return (
-    <footer className="border-t border-white/8 px-6 py-8 sm:px-8 lg:px-12">
-      <div className="mx-auto flex max-w-7xl flex-col gap-5 text-sm text-white/48 sm:flex-row sm:items-center sm:justify-between">
-        <p className="tracking-[0.26em] uppercase text-white/62">AeroTarot</p>
-        <nav className="flex items-center gap-6">
-          <a href="#" className="transition hover:text-white">
-            About
-          </a>
-          <a href="#" className="transition hover:text-white">
-            Contact
-          </a>
-        </nav>
-      </div>
-    </footer>
-  );
-}
+      <section className="px-6 py-20 sm:px-8 lg:px-12">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+          <SectionIntro
+            eyebrow="The experience"
+            title="Designed to feel intimate, arcane, and quietly powerful."
+            body="AeroTarot combines premium ritual objects and thoughtful software without dissolving the mystique that makes tarot magnetic in the first place."
+          />
 
-function SectionIntro({
-  eyebrow,
-  title,
-  body,
-}: {
-  eyebrow: string;
-  title: string;
-  body: string;
-}) {
-  return (
-    <div className="max-w-2xl">
-      <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
-        {eyebrow}
-      </p>
-      <h2
-        className={`${displayFontClass} mt-4 text-4xl leading-tight font-medium tracking-[-0.03em] text-white sm:text-5xl`}
-      >
-        {title}
-      </h2>
-      <p className="mt-5 max-w-xl text-base leading-7 text-white/62">{body}</p>
-    </div>
-  );
-}
+          <div className="space-y-8">
+            {features.map((feature, index) => (
+              <ScrollReveal
+                key={feature.title}
+                delay={index * 110}
+                className="border-t border-white/10 pt-5 sm:pt-6"
+              >
+                <h3 className="text-xl font-medium text-white sm:text-2xl">
+                  {feature.title}
+                </h3>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-white/62 sm:text-base">
+                  {feature.description}
+                </p>
+              </ScrollReveal>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
 
-function TarotCard() {
-  return (
-    <div className="flex h-full flex-col rounded-[1.25rem] border border-amber-100/18 bg-[radial-gradient(circle_at_top,rgba(123,79,255,0.26),transparent_38%),linear-gradient(180deg,rgba(12,10,22,0.98),rgba(6,6,10,1))] px-4 py-5">
-      <div className="flex items-center justify-between text-[0.6rem] uppercase tracking-[0.35em] text-amber-100/55">
-        <span>Aero</span>
-        <span>XVII</span>
-      </div>
-      <div className="relative mt-5 flex-1 overflow-hidden rounded-[1rem] border border-white/8 bg-[radial-gradient(circle_at_50%_32%,rgba(255,215,132,0.28),transparent_16%),radial-gradient(circle_at_50%_36%,rgba(136,94,255,0.62),transparent_34%),linear-gradient(180deg,rgba(18,12,34,0.92),rgba(8,8,12,0.98))]">
-        <div className="absolute inset-x-[24%] top-[17%] h-[38%] rounded-full border border-white/10" />
-        <div className="absolute inset-x-[38%] top-[10%] h-10 rounded-full bg-amber-100/80 blur-xl" />
-        <div className="absolute left-1/2 top-[28%] h-[38%] w-px -translate-x-1/2 bg-white/20" />
-        <div className="absolute inset-x-[18%] bottom-[16%] h-px bg-white/14" />
-      </div>
-      <div className="mt-5">
-        <p className="text-[0.62rem] uppercase tracking-[0.35em] text-white/38">
-          The Star
-        </p>
-      </div>
-    </div>
-  );
-}
+      <section className="px-6 py-20 sm:px-8 lg:px-12">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
+          <SectionIntro
+            eyebrow="The world"
+            title="AeroTarot is being built as a world, not just a website."
+            body="The site is only one threshold into a broader vision shaped by premium objects, connected cards, symbolic design language, and a darker editorial atmosphere around tarot."
+          />
+          <div className="space-y-8">
+            {brandDetails.map((detail, index) => (
+              <ScrollReveal
+                key={detail.title}
+                delay={index * 110}
+                className="border-t border-white/10 pt-5 sm:pt-6"
+              >
+                <h3 className="text-xl font-medium text-white sm:text-2xl">
+                  {detail.title}
+                </h3>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-white/62 sm:text-base">
+                  {detail.body}
+                </p>
+              </ScrollReveal>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
 
-function AppPanel() {
-  return (
-    <div className="flex h-full flex-col rounded-[1.25rem] border border-white/8 bg-[linear-gradient(180deg,rgba(14,12,22,0.95),rgba(8,8,12,0.98))] p-4">
-      <div className="flex items-center justify-between text-[0.58rem] uppercase tracking-[0.3em] text-white/35">
-        <span>Reading</span>
-        <span>Live</span>
-      </div>
-      <div className="mt-5 space-y-3">
-        <div className="h-2 rounded-full bg-white/10" />
-        <div className="h-2 w-5/6 rounded-full bg-white/8" />
-      </div>
-      <div className="mt-6 rounded-[1rem] border border-white/8 bg-[radial-gradient(circle_at_top,rgba(113,76,255,0.32),transparent_40%),rgba(255,255,255,0.02)] p-4">
-        <div className="text-[0.58rem] uppercase tracking-[0.32em] text-white/40">
-          Interpretation
-        </div>
-        <p className="mt-3 text-sm leading-6 text-white/70">
-          A cycle is closing gently. What looked uncertain is becoming
-          directional, asking for trust and disciplined openness.
-        </p>
-      </div>
-      <div className="mt-4 flex gap-2">
-        <div className="h-9 flex-1 rounded-full border border-white/8 bg-white/4" />
-        <div className="h-9 w-10 rounded-full border border-amber-100/18 bg-amber-100/10" />
-      </div>
-    </div>
-  );
-}
+      <section className="px-6 py-20 sm:px-8 lg:px-12">
+        <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+            <div className="max-w-xl">
+              <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
+                Early interest
+              </p>
+              <h2 className="mt-4 max-w-xl text-3xl leading-tight text-white sm:text-4xl">
+                The project is already gathering a distinct circle of attention.
+              </h2>
+              <p className="mt-5 text-base leading-7 text-white/62">
+                Even in this early phase, AeroTarot is revealing itself to
+                collectors, readers, and design-minded spiritual practice in a
+                very specific way.
+              </p>
+            </div>
+            <div className="space-y-8">
+              {earlyInterest.map((item, index) => (
+                <ScrollReveal
+                  key={item.audience}
+                  delay={index * 110}
+                  className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
+                >
+                  <p className="text-sm uppercase tracking-[0.28em] text-amber-100/55">
+                    {item.audience}
+                  </p>
+                  <p className="max-w-xl text-sm leading-7 text-white/62 sm:text-base">
+                    {item.signal}
+                  </p>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
 
-function BackgroundAura() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(80,51,185,0.26),transparent_28%),radial-gradient(circle_at_15%_20%,rgba(205,160,86,0.13),transparent_18%),linear-gradient(180deg,#070709_0%,#050507_42%,#030304_100%)]" />
-      <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
-      <div className="absolute left-[8%] top-24 h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(249,211,134,0.18),transparent_70%)] blur-3xl" />
-      <div className="absolute right-[10%] top-[24rem] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(96,65,223,0.2),transparent_72%)] blur-3xl" />
-    </div>
+      <section className="px-6 py-20 sm:px-8 lg:px-12">
+        <ScrollReveal className="mx-auto flex max-w-7xl flex-col gap-6 border-t border-white/10 pt-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
+              Explore
+            </p>
+            <h2 className="mt-4 max-w-xl text-3xl leading-tight text-white sm:text-4xl">
+              Move deeper into the world of AeroTarot.
+            </h2>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/about"
+              className="rounded-full border border-white/12 px-5 py-3 text-sm text-white/80 transition hover:border-white/25 hover:text-white"
+            >
+              About AeroTarot
+            </Link>
+            <Link
+              href="/deck"
+              className="rounded-full border border-white/12 px-5 py-3 text-sm text-white/80 transition hover:border-white/25 hover:text-white"
+            >
+              Explore the Deck
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full border border-white/12 px-5 py-3 text-sm text-white/80 transition hover:border-white/25 hover:text-white"
+            >
+              Contact
+            </Link>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <section className="px-6 py-20 sm:px-8 lg:px-12">
+        <ScrollReveal>
+          <WaitlistCard source="home-page" />
+        </ScrollReveal>
+      </section>
+    </MarketingPage>
   );
 }

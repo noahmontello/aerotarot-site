@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { captureWaitlistInGoogleSheets } from "../../../lib/google-sheets";
 import { captureWaitlistLead } from "../../../lib/lead-capture";
 import { saveWaitlistSubmission } from "../../../lib/submissions";
 
@@ -20,6 +21,11 @@ export async function POST(request: NextRequest) {
 
   const results = await Promise.allSettled([
     saveWaitlistSubmission({
+      submittedAt,
+      source,
+      email,
+    }),
+    captureWaitlistInGoogleSheets({
       submittedAt,
       source,
       email,

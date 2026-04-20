@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { captureContactInGoogleSheets } from "../../../lib/google-sheets";
 import { captureContactLead } from "../../../lib/lead-capture";
 import { saveContactSubmission } from "../../../lib/submissions";
 
@@ -23,6 +24,14 @@ export async function POST(request: NextRequest) {
 
   const results = await Promise.allSettled([
     saveContactSubmission({
+      submittedAt,
+      source,
+      name,
+      email,
+      inquiryType,
+      message,
+    }),
+    captureContactInGoogleSheets({
       submittedAt,
       source,
       name,

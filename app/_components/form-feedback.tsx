@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 export function WaitlistFeedback() {
   const searchParams = useSearchParams();
   const submitted = searchParams.get("submitted") === "1";
-  const error = searchParams.get("error") === "missing-email";
+  const error = searchParams.get("error");
 
   if (!submitted && !error) {
     return null;
@@ -20,9 +20,17 @@ export function WaitlistFeedback() {
     );
   }
 
+  if (error === "missing-email") {
+    return (
+      <div className="mx-auto mt-8 max-w-2xl rounded-[1.5rem] border border-amber-200/18 bg-amber-100/6 px-5 py-4 text-left text-sm leading-7 text-amber-100/78">
+        Please enter an email address so we can add you to the waitlist.
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-auto mt-8 max-w-2xl rounded-[1.5rem] border border-amber-200/18 bg-amber-100/6 px-5 py-4 text-left text-sm leading-7 text-amber-100/78">
-      Please enter an email address so we can add you to the waitlist.
+    <div className="mx-auto mt-8 max-w-2xl rounded-[1.5rem] border border-rose-200/18 bg-rose-100/6 px-5 py-4 text-left text-sm leading-7 text-rose-100/78">
+      The waitlist submission did not go through. Please try again in a moment.
     </div>
   );
 }
@@ -30,7 +38,7 @@ export function WaitlistFeedback() {
 export function ContactFeedback() {
   const searchParams = useSearchParams();
   const submitted = searchParams.get("submitted") === "1";
-  const error = searchParams.get("error") === "missing-fields";
+  const error = searchParams.get("error");
 
   if (!submitted && !error) {
     return null;
@@ -45,9 +53,17 @@ export function ContactFeedback() {
     );
   }
 
+  if (error === "missing-fields") {
+    return (
+      <div className="rounded-[1.5rem] border border-amber-200/18 bg-amber-100/6 px-5 py-4 text-sm leading-7 text-amber-100/78">
+        Please fill in your name, email, and message before sending the form.
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-[1.5rem] border border-amber-200/18 bg-amber-100/6 px-5 py-4 text-sm leading-7 text-amber-100/78">
-      Please fill in your name, email, and message before sending the form.
+    <div className="rounded-[1.5rem] border border-rose-200/18 bg-rose-100/6 px-5 py-4 text-sm leading-7 text-rose-100/78">
+      The contact form submission did not go through. Please try again in a moment.
     </div>
   );
 }

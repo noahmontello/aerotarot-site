@@ -375,9 +375,11 @@ body {
 
 .home-launch-constellation {
   position: absolute;
-  inset: 14% 14% 16%;
-  width: auto;
-  height: auto;
+  left: 50%;
+  top: 50%;
+  width: 68%;
+  height: 68%;
+  transform: translate(-50%, -50%);
   overflow: visible;
   filter: drop-shadow(0 0 10px rgba(255, 248, 204, 0.48));
 }
@@ -392,6 +394,10 @@ body {
 
 .home-launch-constellation-dot {
   fill: rgba(255, 248, 210, 0.96);
+}
+
+.home-launch-spark-shape {
+  fill: rgba(255, 243, 205, 0.92);
 }
 
 .home-launch-face-sheen {

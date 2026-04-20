@@ -4,7 +4,13 @@ import { useEffect, useRef, useState } from "react";
 
 const LAUNCH_KEY = "aerotarot-home-launch-seen";
 
-export function HomeLaunchOverlay() {
+export function HomeLaunchOverlay({
+  onComplete,
+  storageKey = LAUNCH_KEY,
+}: {
+  onComplete?: () => void;
+  storageKey?: string;
+}) {
   const stackRef = useRef<HTMLDivElement | null>(null);
   const [phase, setPhase] = useState<"checking" | "entering" | "exiting" | "hidden">(
     "checking",
@@ -17,7 +23,7 @@ export function HomeLaunchOverlay() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const hasSeenLaunch = window.sessionStorage.getItem(LAUNCH_KEY) === "true";
+    const hasSeenLaunch = window.sessionStorage.getItem(storageKey) === "true";
     let skipTimer: number | null = null;
 
     if (reduceMotion || hasSeenLaunch) {
@@ -30,14 +36,14 @@ export function HomeLaunchOverlay() {
       };
     }
 
-    window.sessionStorage.setItem(LAUNCH_KEY, "true");
+    window.sessionStorage.setItem(storageKey, "true");
 
     const showTimer = window.setTimeout(() => setPhase("entering"), 0);
-    const cardsTimer = window.setTimeout(() => setCardsVisible(true), 110);
-    const titleTimer = window.setTimeout(() => setTitleVisible(true), 680);
-    const subtitleTimer = window.setTimeout(() => setSubtitleVisible(true), 980);
-    const exitTimer = window.setTimeout(() => setPhase("exiting"), 3080);
-    const hideTimer = window.setTimeout(() => setPhase("hidden"), 3480);
+    const cardsTimer = window.setTimeout(() => setCardsVisible(true), 140);
+    const titleTimer = window.setTimeout(() => setTitleVisible(true), 820);
+    const subtitleTimer = window.setTimeout(() => setSubtitleVisible(true), 1180);
+    const exitTimer = window.setTimeout(() => setPhase("exiting"), 3980);
+    const hideTimer = window.setTimeout(() => setPhase("hidden"), 4480);
 
     return () => {
       window.clearTimeout(showTimer);
@@ -47,7 +53,13 @@ export function HomeLaunchOverlay() {
       window.clearTimeout(exitTimer);
       window.clearTimeout(hideTimer);
     };
-  }, []);
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (phase === "hidden") {
+      onComplete?.();
+    }
+  }, [onComplete, phase]);
 
   useEffect(() => {
     const node = stackRef.current;
@@ -171,7 +183,7 @@ function CardFace({
         <div className={`home-launch-face-inner ${center ? "is-center" : ""}`}>
           <div className={`home-launch-glyph home-launch-glyph-${variant}`}>
             {center ? (
-              <ConstellationGlyph />
+              <SparkGlyph />
             ) : variant === "moon" ? (
               <MoonGlyph />
             ) : variant === "sun" ? (
@@ -221,24 +233,39 @@ function SunGlyph() {
   );
 }
 
-function ConstellationGlyph() {
+function SparkGlyph() {
   return (
     <svg
-      viewBox="0 0 120 160"
+      viewBox="0 0 120 120"
       className="home-launch-constellation"
       aria-hidden="true"
     >
-      <path
-        d="M60 40 L38 64 L61 90 L83 65 L60 40 Z M61 90 L43 114 M61 90 L80 111"
-        className="home-launch-constellation-line"
-      />
-      <circle cx="60" cy="40" r="4.5" className="home-launch-constellation-dot" />
-      <circle cx="38" cy="64" r="4.5" className="home-launch-constellation-dot" />
-      <circle cx="61" cy="90" r="4.5" className="home-launch-constellation-dot" />
-      <circle cx="83" cy="65" r="4.5" className="home-launch-constellation-dot" />
-      <circle cx="43" cy="114" r="3.5" className="home-launch-constellation-dot" />
-      <circle cx="80" cy="111" r="3.5" className="home-launch-constellation-dot" />
+      <g transform="translate(62 70)">
+        <AppleSparkle size={28} />
+      </g>
+      <g transform="translate(35 47) scale(0.58)">
+        <AppleSparkle size={15} />
+      </g>
+      <g transform="translate(73 24) scale(0.4)">
+        <AppleSparkle size={13} />
+      </g>
     </svg>
+  );
+}
+
+function AppleSparkle({ size }: { size: number }) {
+  return (
+    <path
+      d={`
+        M 0 ${-size}
+        C ${size * 0.08} ${-size * 0.56}, ${size * 0.18} ${-size * 0.18}, ${size} 0
+        C ${size * 0.18} ${size * 0.18}, ${size * 0.08} ${size * 0.56}, 0 ${size}
+        C ${-size * 0.08} ${size * 0.56}, ${-size * 0.18} ${size * 0.18}, ${-size} 0
+        C ${-size * 0.18} ${-size * 0.18}, ${-size * 0.08} ${-size * 0.56}, 0 ${-size}
+        Z
+      `}
+      className="home-launch-spark-shape"
+    />
   );
 }
 

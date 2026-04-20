@@ -1,15 +1,17 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { HomeLaunchOverlay } from "./home-launch";
 import { WaitlistCard, displayFontClass } from "./marketing";
 
 const ACCESS_KEY = "aerotarot-site-access";
 const GATE_LAUNCH_KEY = "aerotarot-gate-launch-seen";
+const DEFAULT_SITE_PASSWORD = "thefool";
 
 export function SiteGate({ children }: { children: React.ReactNode }) {
-  const expectedPassword = process.env.NEXT_PUBLIC_SITE_PASSWORD?.trim() ?? "";
-  const gateEnabled = expectedPassword.length > 0;
+  const expectedPassword =
+    process.env.NEXT_PUBLIC_SITE_PASSWORD?.trim() || DEFAULT_SITE_PASSWORD;
+  const gateEnabled = true;
 
   const [launchComplete, setLaunchComplete] = useState(!gateEnabled);
   const [status, setStatus] = useState<"checking" | "locked" | "unlocked">(
@@ -30,13 +32,7 @@ export function SiteGate({ children }: { children: React.ReactNode }) {
     return () => window.clearTimeout(timer);
   }, [expectedPassword, gateEnabled]);
 
-  const helper = useMemo(() => {
-    if (!gateEnabled) {
-      return "Set NEXT_PUBLIC_SITE_PASSWORD in .env.local to enable private preview mode.";
-    }
-
-    return "Enter the shared preview password to continue.";
-  }, [gateEnabled]);
+  const helper = "Enter the shared preview password to continue.";
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

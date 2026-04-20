@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type HTMLAttributes,
   type ReactNode,
 } from "react";
 
@@ -12,10 +13,15 @@ export function ScrollReveal({
   children,
   className = "",
   delay = 0,
-}: {
+  threshold = 0.18,
+  rootMargin = "0px 0px -10% 0px",
+  style,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
   children: ReactNode;
-  className?: string;
   delay?: number;
+  threshold?: number;
+  rootMargin?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -29,24 +35,22 @@ export function ScrollReveal({
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
+        setVisible(Boolean(entries[0]?.isIntersecting));
       },
-      { threshold: 0.18, rootMargin: "0px 0px -10% 0px" },
+      { threshold, rootMargin },
     );
 
     observer.observe(node);
 
     return () => observer.disconnect();
-  }, []);
+  }, [rootMargin, threshold]);
 
   return (
     <div
       ref={ref}
       className={`scroll-reveal ${visible ? "is-visible" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ ...style, transitionDelay: `${delay}ms` }}
+      {...props}
     >
       {children}
     </div>

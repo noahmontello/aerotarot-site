@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense, type ReactNode } from "react";
 import { WaitlistFeedback } from "./form-feedback";
 
-type NavKey = "home" | "about" | "deck" | "contact" | "waitlist";
+type NavKey = "home" | "about" | "cards" | "deck" | "contact" | "waitlist";
 
 type SectionIntroProps = {
   eyebrow: string;
@@ -13,11 +13,13 @@ type SectionIntroProps = {
 type MarketingPageProps = {
   current: NavKey;
   children: ReactNode;
+  showHeader?: boolean;
 };
 
 const navItems = [
   { href: "/", label: "Home", key: "home" },
   { href: "/about", label: "About", key: "about" },
+  { href: "/cards", label: "Cards", key: "cards" },
   { href: "/deck", label: "Deck", key: "deck" },
   { href: "/contact", label: "Contact", key: "contact" },
   { href: "/waitlist", label: "Waitlist", key: "waitlist" },
@@ -89,12 +91,16 @@ export const heroNotes = [
 export const displayFontClass =
   "[font-family:'Iowan_Old_Style','Palatino_Linotype','Book_Antiqua','Times_New_Roman',serif]";
 
-export function MarketingPage({ current, children }: MarketingPageProps) {
+export function MarketingPage({
+  current,
+  children,
+  showHeader = true,
+}: MarketingPageProps) {
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
       <BackgroundAura />
       <div className="relative">
-        <SiteHeader current={current} />
+        {showHeader ? <SiteHeader current={current} /> : null}
         {children}
         <Footer />
       </div>
@@ -334,6 +340,9 @@ function Footer() {
             </Link>
             <Link href="/deck" className="transition hover:text-white">
               Deck Store
+            </Link>
+            <Link href="/cards" className="transition hover:text-white">
+              Card Meanings
             </Link>
             <Link href="/contact" className="transition hover:text-white">
               Contact

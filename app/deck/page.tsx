@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ScrollReveal } from "../_components/home-scroll";
 import {
   MarketingPage,
   SectionIntro,
@@ -77,7 +78,7 @@ export default function DeckPage() {
   return (
     <MarketingPage current="deck">
       <section className="relative -mt-16 overflow-hidden pt-16">
-        <div className="mx-auto grid max-w-7xl gap-16 px-6 py-24 sm:px-8 sm:py-28 lg:grid-cols-[minmax(0,1.08fr)_minmax(340px,0.92fr)] lg:px-12 lg:py-32">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-16 px-6 py-24 sm:px-8 sm:py-28 lg:grid-cols-[minmax(0,1.08fr)_minmax(340px,0.92fr)] lg:px-12 lg:py-32">
           <div className="max-w-2xl">
             <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
               The deck store
@@ -193,11 +194,11 @@ export default function DeckPage() {
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 pb-10 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-7xl">
+        <ScrollReveal className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-t border-white/10 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(320px,0.72fr)]">
             <div className="max-w-2xl">
               <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
@@ -309,41 +310,43 @@ export default function DeckPage() {
               ) : null}
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
           <SectionIntro
             eyebrow="Store overview"
             title="A premium collection page designed around the product itself."
             body="This page introduces the NFC AeroTarot collection as an object people can want, understand, and eventually purchase. The emphasis is on the cards, how they work, and why they feel special."
           />
           <div className="space-y-8">
-            {storeDetails.map((detail) => (
-              <div
+            {storeDetails.map((detail, index) => (
+              <ScrollReveal
                 key={detail}
+                delay={index * 80}
                 className="flex items-start gap-4 border-t border-white/10 pt-5 text-base leading-7 text-white/62"
               >
                 <span className="mt-3 h-1.5 w-1.5 rounded-full bg-amber-100/70" />
                 <p>{detail}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <SectionIntro
             eyebrow="What&apos;s included"
             title="More than a tarot object. More than a digital collectible."
             body="The AeroTarot NFC collection is meant to sit between beautiful product design and connected interaction, giving each card both physical and digital value."
           />
           <div className="space-y-8">
-            {included.map((item) => (
-              <div
+            {included.map((item, index) => (
+              <ScrollReveal
                 key={item.title}
+                delay={index * 80}
                 className="border-t border-white/10 pt-5 sm:pt-6"
               >
                 <h3 className="text-xl font-medium text-white sm:text-2xl">
@@ -352,14 +355,14 @@ export default function DeckPage() {
                 <p className="mt-3 max-w-xl text-sm leading-7 text-white/62 sm:text-base">
                   {item.body}
                 </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
+        <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
@@ -372,9 +375,10 @@ export default function DeckPage() {
               </h2>
             </div>
             <div className="space-y-8">
-              {nfcFlow.map((item) => (
-                <div
+              {nfcFlow.map((item, index) => (
+                <ScrollReveal
                   key={item.step}
+                  delay={index * 90}
                   className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
                 >
                   <p className="text-sm uppercase tracking-[0.28em] text-amber-100/55">
@@ -388,15 +392,17 @@ export default function DeckPage() {
                       {item.body}
                     </p>
                   </div>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <WaitlistCard source="deck-page" />
+        <ScrollReveal>
+          <WaitlistCard source="deck-page" />
+        </ScrollReveal>
       </section>
     </MarketingPage>
   );

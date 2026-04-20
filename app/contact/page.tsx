@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { ContactFeedback } from "../_components/form-feedback";
+import { ScrollReveal } from "../_components/home-scroll";
 import {
   MarketingPage,
   SectionIntro,
@@ -27,7 +28,7 @@ export default function ContactPage() {
   return (
     <MarketingPage current="contact">
       <section className="relative -mt-16 overflow-hidden pt-16">
-        <div className="mx-auto grid max-w-7xl gap-16 px-6 py-24 sm:px-8 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)] lg:px-12 lg:py-32">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-16 px-6 py-24 sm:px-8 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)] lg:px-12 lg:py-32">
           <div className="max-w-2xl">
             <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
               Contact
@@ -81,20 +82,21 @@ export default function ContactPage() {
               </p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
           <SectionIntro
             eyebrow="Get in touch about"
             title="AeroTarot is especially open to a few kinds of conversation."
             body="This page is less about customer support and more about meaningful connection while the brand is still taking shape."
           />
           <div className="space-y-8">
-            {reasons.map((reason) => (
-              <div
+            {reasons.map((reason, index) => (
+              <ScrollReveal
                 key={reason.title}
+                delay={index * 90}
                 className="border-t border-white/10 pt-5 sm:pt-6"
               >
                 <h3 className="text-xl font-medium text-white sm:text-2xl">
@@ -103,14 +105,14 @@ export default function ContactPage() {
                 <p className="mt-3 max-w-xl text-sm leading-7 text-white/62 sm:text-base">
                   {reason.body}
                 </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
+        <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <div className="max-w-xl">
               <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
@@ -210,11 +212,13 @@ export default function ContactPage() {
               </form>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <WaitlistCard source="contact-page" />
+        <ScrollReveal>
+          <WaitlistCard source="contact-page" />
+        </ScrollReveal>
       </section>
     </MarketingPage>
   );

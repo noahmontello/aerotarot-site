@@ -52,29 +52,29 @@ export default function Home() {
     <MarketingPage current="home">
       <section className="relative -mt-16 overflow-hidden pt-16">
           <div className="absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_22%_24%,rgba(121,77,255,0.18),transparent_22%),radial-gradient(circle_at_74%_30%,rgba(244,196,110,0.1),transparent_16%),radial-gradient(circle_at_58%_68%,rgba(84,48,189,0.12),transparent_20%)]" />
-          <div className="mx-auto flex min-h-[calc(100svh-4.75rem)] max-w-7xl flex-col justify-center gap-7 px-6 py-10 sm:gap-8 sm:px-8 sm:py-12 lg:gap-9 lg:px-12 lg:py-16">
+          <div className="mx-auto flex min-h-[calc(100svh-4.75rem)] max-w-7xl flex-col justify-center gap-12 px-6 py-12 sm:gap-8 sm:px-8 sm:py-12 lg:gap-9 lg:px-12 lg:py-16">
             <ParallaxLayer
               speed={0.14}
-              className="relative flex items-center justify-center"
+              className="relative flex items-center justify-center pb-2 sm:pb-0"
             >
               <div className="flex flex-col items-center">
                 <HomeHeroStack />
-                <div className="mt-1 text-center sm:mt-2">
+                <div className="mt-4 text-center sm:mt-2">
                   <p
                     className={`${displayFontClass} text-[2.9rem] leading-none tracking-[-0.04em] text-white sm:text-[3.6rem]`}
                   >
                     AeroTarot
                   </p>
-                  <p className="mt-2 text-sm font-medium tracking-[0.02em] text-white/66 sm:text-base">
+                  <p className="mt-3 px-4 text-[0.95rem] leading-relaxed font-medium tracking-[0.01em] text-white/66 sm:mt-2 sm:px-0 sm:text-base">
                     Intuitive. Guidance. Reimagined.
                   </p>
                 </div>
               </div>
             </ParallaxLayer>
 
-            <ParallaxLayer speed={0.08} className="mx-auto w-full max-w-7xl">
+            <ParallaxLayer speed={0.08} className="mx-auto mt-3 w-full max-w-7xl sm:mt-0">
               <div className="w-full max-w-3xl">
-                <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
+                <p className="text-[0.62rem] uppercase tracking-[0.34em] text-white/50 sm:text-[0.68rem] sm:tracking-[0.42em]">
                   Physical ritual. Digital depth.
                 </p>
                 <h1

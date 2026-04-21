@@ -125,6 +125,7 @@ export default function AboutPage() {
               <ScrollReveal
                 key={item.label}
                 delay={90}
+                topFade={false}
                 className="border-t border-white/10 pt-5 sm:pt-6"
               >
                 <p className="text-sm uppercase tracking-[0.28em] text-amber-100/55">
@@ -180,6 +181,7 @@ export default function AboutPage() {
               <ScrollReveal
                 key={principle.label}
                 delay={90}
+                topFade={false}
                 className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
               >
                 <p className="text-sm uppercase tracking-[0.28em] text-amber-100/55">
@@ -211,6 +213,7 @@ export default function AboutPage() {
                 <ScrollReveal
                   key={item}
                   delay={90}
+                  topFade={false}
                   className="flex items-start gap-4 border-t border-white/10 pt-5 text-base leading-7 text-white/62"
                 >
                   <span className="mt-3 h-1.5 w-1.5 rounded-full bg-amber-100/70" />

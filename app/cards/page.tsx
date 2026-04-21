@@ -21,8 +21,11 @@ export const metadata: Metadata = {
 export default function CardsPage() {
   return (
     <MarketingPage current="cards">
-      <FloatingSection className="cards-library-section">
-        <ScrollReveal topFade={false} className="mx-auto max-w-7xl">
+      <section className="relative -mt-16 overflow-hidden pt-16">
+        <ScrollReveal
+          topFade={false}
+          className="page-lead-grid mx-auto max-w-7xl px-6 sm:px-8 lg:px-12"
+        >
           <SectionIntro
             eyebrow="Deck breakdown"
             title="Explore the 78 tarot cards through a calmer, more luminous guide."
@@ -43,10 +46,9 @@ export default function CardsPage() {
             </Link>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {deckBreakdown.map((group, index) => (
-              <ScrollReveal
+            {deckBreakdown.map((group) => (
+              <div
                 key={group.id}
-                delay={index * 90}
                 className="group rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.012))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-amber-100/28 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.016))]"
               >
                 <a href={`#${group.id}`} className="block">
@@ -61,11 +63,11 @@ export default function CardsPage() {
                     Jump to section
                   </p>
                 </a>
-              </ScrollReveal>
+              </div>
             ))}
           </div>
         </ScrollReveal>
-      </FloatingSection>
+      </section>
 
       <FloatingSection className="cards-library-section scroll-mt-28">
         <div id="major-arcana" />
@@ -99,6 +101,7 @@ export default function CardsPage() {
           <ScrollReveal
             id="court-cards"
             delay={120}
+            topFade={false}
             className="mt-10 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-8 shadow-[0_24px_80px_rgba(0,0,0,0.3)] sm:px-8"
           >
             <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">

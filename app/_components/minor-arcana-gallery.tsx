@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { MinorSuit } from "../cards/data";
-import { ScrollReveal } from "./home-scroll";
 
 export function MinorArcanaGallery({
   suits,
@@ -39,14 +38,8 @@ export function MinorArcanaGallery({
   return (
     <>
       <div className="mt-12 grid gap-5 lg:grid-cols-2">
-        {suits.map((suit, index) => (
-          <ScrollReveal
-            key={suit.slug}
-            delay={(index % 2) * 100}
-            threshold={0.03}
-            rootMargin="0px 0px 10% 0px"
-            className="h-full"
-          >
+        {suits.map((suit) => (
+          <div key={suit.slug} className="h-full">
             <button
               type="button"
               onClick={() => setActiveSuit(suit)}
@@ -76,7 +69,7 @@ export function MinorArcanaGallery({
                 Tap for deeper overview
               </p>
             </button>
-          </ScrollReveal>
+          </div>
         ))}
       </div>
 

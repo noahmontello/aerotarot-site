@@ -134,6 +134,7 @@ export default function Home() {
                 <ScrollReveal
                   key={step.number}
                   delay={index * 110}
+                  topFade={false}
                   className="border-t border-white/12 pt-5 md:pt-6"
                 >
                   <p className="text-xs tracking-[0.35em] uppercase text-amber-100/55">
@@ -164,6 +165,7 @@ export default function Home() {
                 <ScrollReveal
                   key={feature.title}
                   delay={index * 110}
+                  topFade={false}
                   className="border-t border-white/10 pt-5 sm:pt-6"
                 >
                   <h3 className="text-xl font-medium text-white sm:text-2xl">
@@ -190,6 +192,7 @@ export default function Home() {
                 <ScrollReveal
                   key={detail.title}
                   delay={index * 110}
+                  topFade={false}
                   className="border-t border-white/10 pt-5 sm:pt-6"
                 >
                   <h3 className="text-xl font-medium text-white sm:text-2xl">
@@ -225,6 +228,7 @@ export default function Home() {
                   <ScrollReveal
                     key={item.audience}
                     delay={index * 110}
+                    topFade={false}
                     className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
                   >
                     <p className="text-sm uppercase tracking-[0.28em] text-amber-100/55">

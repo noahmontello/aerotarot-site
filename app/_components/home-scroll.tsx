@@ -3,7 +3,6 @@
 import {
   useEffect,
   useRef,
-  useState,
   type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
@@ -13,8 +12,8 @@ export function ScrollReveal({
   children,
   className = "",
   delay = 0,
-  threshold = 0.18,
-  rootMargin = "0px 0px -10% 0px",
+  threshold: _threshold = 0.18,
+  rootMargin: _rootMargin = "0px 0px -10% 0px",
   topFade = true,
   style,
   ...props
@@ -26,7 +25,8 @@ export function ScrollReveal({
   topFade?: boolean;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
+  void _threshold;
+  void _rootMargin;
 
   useEffect(() => {
     const node = ref.current;
@@ -44,10 +44,18 @@ export function ScrollReveal({
       const viewportHeight = window.innerHeight;
       const centerOffset = rect.top + rect.height / 2 - viewportHeight / 2;
       const floatY = clamp(centerOffset * -0.035, -18, 18);
+      const revealStart = viewportHeight * 1.06;
+      const revealEnd = viewportHeight * 0.78;
+      const entryOpacity = clamp(
+        (revealStart - rect.top) / (revealStart - revealEnd),
+        0,
+        1,
+      );
 
       const headerFadeStart = 124;
       const headerFadeEnd = 28;
-      const topOpacity = topFade
+      const isTallSection = rect.height > viewportHeight * 0.92;
+      const topOpacity = topFade && !isTallSection
         ? clamp(
             (rect.top - headerFadeEnd) / (headerFadeStart - headerFadeEnd),
             0,
@@ -55,6 +63,7 @@ export function ScrollReveal({
           )
         : 1;
 
+      node.style.setProperty("--scroll-visibility", `${entryOpacity}`);
       node.style.setProperty("--scroll-float-y", `${floatY}px`);
       node.style.setProperty("--scroll-top-opacity", `${topOpacity}`);
       frameRef = null;
@@ -67,16 +76,6 @@ export function ScrollReveal({
 
       frameRef = window.requestAnimationFrame(updateMotion);
     };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setVisible(Boolean(entries[0]?.isIntersecting));
-        requestUpdate();
-      },
-      { threshold, rootMargin },
-    );
-
-    observer.observe(node);
     requestUpdate();
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
@@ -85,16 +84,15 @@ export function ScrollReveal({
       if (frameRef !== null) {
         window.cancelAnimationFrame(frameRef);
       }
-      observer.disconnect();
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
-  }, [rootMargin, threshold, topFade]);
+  }, [topFade]);
 
   return (
     <div
       ref={ref}
-      className={`scroll-reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`scroll-reveal ${className}`}
       style={{ ...style, transitionDelay: `${delay}ms` }}
       {...props}
     >

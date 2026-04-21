@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { MajorArcanaCard } from "../cards/data";
-import { ScrollReveal } from "./home-scroll";
 
 export function MajorArcanaGallery({
   cards,
@@ -38,14 +37,8 @@ export function MajorArcanaGallery({
   return (
     <>
       <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {cards.map((card, index) => (
-          <ScrollReveal
-            key={card.slug}
-            delay={(index % 3) * 90}
-            threshold={0.03}
-            rootMargin="0px 0px 10% 0px"
-            className="h-full"
-          >
+        {cards.map((card) => (
+          <div key={card.slug} className="h-full">
             <button
               type="button"
               onClick={() => {
@@ -72,7 +65,7 @@ export function MajorArcanaGallery({
                 Tap for full breakdown
               </p>
             </button>
-          </ScrollReveal>
+          </div>
         ))}
       </div>
 

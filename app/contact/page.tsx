@@ -101,6 +101,7 @@ export default function ContactPage() {
               <ScrollReveal
                 key={reason.title}
                 delay={index * 90}
+                topFade={false}
                 className="border-t border-white/10 pt-5 sm:pt-6"
               >
                 <h3 className="text-xl font-medium text-white sm:text-2xl">

@@ -68,6 +68,7 @@ export default function WaitlistPage() {
                 <ScrollReveal
                   key={item.label}
                   delay={index * 90}
+                  topFade={false}
                   className="flex flex-col gap-2 border-t border-white/10 pt-5"
                 >
                   <p className="text-xs uppercase tracking-[0.28em] text-amber-100/55">

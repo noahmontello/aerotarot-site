@@ -988,16 +988,13 @@ body {
   --scroll-float-y: 0px;
   opacity: 0;
   opacity: calc(var(--scroll-visibility) * var(--scroll-top-opacity));
-  transform: translateY(calc(34px + var(--scroll-float-y))) scale(0.994);
+  transform:
+    translateY(calc((1 - var(--scroll-visibility)) * 34px + var(--scroll-float-y)))
+    scale(calc(0.994 + (var(--scroll-visibility) * 0.006)));
   transition:
-    opacity 900ms ease,
-    transform 1450ms cubic-bezier(0.2, 0.86, 0.24, 1);
+    opacity 220ms linear,
+    transform 280ms cubic-bezier(0.22, 0.88, 0.24, 1);
   will-change: transform, opacity;
-}
-
-.scroll-reveal.is-visible {
-  --scroll-visibility: 1;
-  transform: translateY(var(--scroll-float-y)) scale(1);
 }
 
 .parallax-layer {

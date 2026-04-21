@@ -4,6 +4,7 @@ import { ScrollReveal } from "../_components/home-scroll";
 import { MajorArcanaGallery } from "../_components/major-arcana-gallery";
 import { MinorArcanaGallery } from "../_components/minor-arcana-gallery";
 import {
+  FloatingSection,
   MarketingPage,
   SectionIntro,
   WaitlistCard,
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
 export default function CardsPage() {
   return (
     <MarketingPage current="cards">
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
-        <ScrollReveal className="mx-auto max-w-7xl">
+      <FloatingSection className="cards-library-section">
+        <ScrollReveal topFade={false} className="mx-auto max-w-7xl">
           <SectionIntro
             eyebrow="Deck breakdown"
             title="Explore the 78 tarot cards through a calmer, more luminous guide."
@@ -64,10 +65,15 @@ export default function CardsPage() {
             ))}
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section id="major-arcana" className="px-6 py-20 sm:px-8 lg:px-12">
-        <ScrollReveal className="mx-auto max-w-7xl">
+      <FloatingSection className="cards-library-section scroll-mt-28">
+        <div id="major-arcana" />
+        <ScrollReveal
+          className="mx-auto max-w-7xl"
+          threshold={0.03}
+          rootMargin="0px 0px 8% 0px"
+        >
           <SectionIntro
             eyebrow="Major Arcana"
             title="Twenty-two archetypal cards that shape the emotional and spiritual architecture of a reading."
@@ -75,10 +81,15 @@ export default function CardsPage() {
           />
           <MajorArcanaGallery cards={majorArcana} />
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section id="minor-arcana" className="px-6 py-20 sm:px-8 lg:px-12">
-        <ScrollReveal className="mx-auto max-w-7xl">
+      <FloatingSection className="cards-library-section scroll-mt-28">
+        <div id="minor-arcana" />
+        <ScrollReveal
+          className="mx-auto max-w-7xl"
+          threshold={0.03}
+          rootMargin="0px 0px 8% 0px"
+        >
           <SectionIntro
             eyebrow="Minor Arcana"
             title="Four suits that translate tarot from archetype into daily experience."
@@ -104,9 +115,9 @@ export default function CardsPage() {
             </p>
           </ScrollReveal>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection className="cards-library-section">
         <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
             <div>
@@ -133,9 +144,9 @@ export default function CardsPage() {
             </div>
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection className="cards-library-section">
         <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-amber-100/18 bg-[radial-gradient(circle_at_top,rgba(121,77,255,0.18),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.012))] px-6 py-12 text-center shadow-[0_30px_100px_rgba(0,0,0,0.42)] sm:px-8">
           <p className="text-[0.68rem] uppercase tracking-[0.42em] text-amber-100/58">
             Begin with the deck
@@ -164,13 +175,13 @@ export default function CardsPage() {
             </Link>
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal>
           <WaitlistCard source="cards-page" />
         </ScrollReveal>
-      </section>
+      </FloatingSection>
     </MarketingPage>
   );
 }

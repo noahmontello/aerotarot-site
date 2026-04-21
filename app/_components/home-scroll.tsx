@@ -15,6 +15,7 @@ export function ScrollReveal({
   delay = 0,
   threshold = 0.18,
   rootMargin = "0px 0px -10% 0px",
+  topFade = true,
   style,
   ...props
 }: HTMLAttributes<HTMLDivElement> & {
@@ -22,28 +23,73 @@ export function ScrollReveal({
   delay?: number;
   threshold?: number;
   rootMargin?: string;
+  topFade?: boolean;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
+    let frameRef: number | null = null;
 
     if (!node) {
       return;
     }
 
+    const clamp = (value: number, min: number, max: number) =>
+      Math.min(max, Math.max(min, value));
+
+    const updateMotion = () => {
+      const rect = node.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const centerOffset = rect.top + rect.height / 2 - viewportHeight / 2;
+      const floatY = clamp(centerOffset * -0.035, -18, 18);
+
+      const headerFadeStart = 124;
+      const headerFadeEnd = 28;
+      const topOpacity = topFade
+        ? clamp(
+            (rect.top - headerFadeEnd) / (headerFadeStart - headerFadeEnd),
+            0,
+            1,
+          )
+        : 1;
+
+      node.style.setProperty("--scroll-float-y", `${floatY}px`);
+      node.style.setProperty("--scroll-top-opacity", `${topOpacity}`);
+      frameRef = null;
+    };
+
+    const requestUpdate = () => {
+      if (frameRef !== null) {
+        return;
+      }
+
+      frameRef = window.requestAnimationFrame(updateMotion);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         setVisible(Boolean(entries[0]?.isIntersecting));
+        requestUpdate();
       },
       { threshold, rootMargin },
     );
 
     observer.observe(node);
+    requestUpdate();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
 
-    return () => observer.disconnect();
-  }, [rootMargin, threshold]);
+    return () => {
+      if (frameRef !== null) {
+        window.cancelAnimationFrame(frameRef);
+      }
+      observer.disconnect();
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, [rootMargin, threshold, topFade]);
 
   return (
     <div
@@ -80,7 +126,7 @@ export function ParallaxLayer({
       const rect = node.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const centerOffset = rect.top + rect.height / 2 - viewportHeight / 2;
-      const translateY = centerOffset * -speed;
+      const translateY = Math.max(-20, Math.min(20, centerOffset * -speed));
 
       node.style.setProperty("--parallax-y", `${translateY}px`);
       frameRef.current = null;

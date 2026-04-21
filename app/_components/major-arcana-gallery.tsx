@@ -42,8 +42,8 @@ export function MajorArcanaGallery({
           <ScrollReveal
             key={card.slug}
             delay={(index % 3) * 90}
-            threshold={0.14}
-            rootMargin="0px 0px -6% 0px"
+            threshold={0.03}
+            rootMargin="0px 0px 10% 0px"
             className="h-full"
           >
             <button

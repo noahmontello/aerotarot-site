@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { ContactFeedback } from "../_components/form-feedback";
 import { ScrollReveal } from "../_components/home-scroll";
 import {
+  FloatingSection,
   MarketingPage,
   SectionIntro,
   WaitlistCard,
@@ -28,7 +29,10 @@ export default function ContactPage() {
   return (
     <MarketingPage current="contact">
       <section className="relative -mt-16 overflow-hidden pt-16">
-        <ScrollReveal className="mx-auto grid max-w-7xl gap-16 px-6 py-24 sm:px-8 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)] lg:px-12 lg:py-32">
+        <ScrollReveal
+          topFade={false}
+          className="page-lead-grid mx-auto max-w-7xl gap-16 px-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)] lg:px-12"
+        >
           <div className="max-w-2xl">
             <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
               Contact
@@ -85,7 +89,7 @@ export default function ContactPage() {
         </ScrollReveal>
       </section>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
           <SectionIntro
             eyebrow="Get in touch about"
@@ -109,9 +113,9 @@ export default function ContactPage() {
             ))}
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <div className="max-w-xl">
@@ -213,13 +217,13 @@ export default function ContactPage() {
             </div>
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal>
           <WaitlistCard source="contact-page" />
         </ScrollReveal>
-      </section>
+      </FloatingSection>
     </MarketingPage>
   );
 }

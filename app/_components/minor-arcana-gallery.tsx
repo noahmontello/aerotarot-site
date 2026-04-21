@@ -43,8 +43,8 @@ export function MinorArcanaGallery({
           <ScrollReveal
             key={suit.slug}
             delay={(index % 2) * 100}
-            threshold={0.14}
-            rootMargin="0px 0px -6% 0px"
+            threshold={0.03}
+            rootMargin="0px 0px 10% 0px"
             className="h-full"
           >
             <button

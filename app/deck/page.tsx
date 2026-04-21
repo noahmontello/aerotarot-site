@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ScrollReveal } from "../_components/home-scroll";
 import {
+  FloatingSection,
   MarketingPage,
   SectionIntro,
   WaitlistCard,
@@ -78,7 +79,10 @@ export default function DeckPage() {
   return (
     <MarketingPage current="deck">
       <section className="relative -mt-16 overflow-hidden pt-16">
-        <ScrollReveal className="mx-auto grid max-w-7xl gap-16 px-6 py-24 sm:px-8 sm:py-28 lg:grid-cols-[minmax(0,1.08fr)_minmax(340px,0.92fr)] lg:px-12 lg:py-32">
+        <ScrollReveal
+          topFade={false}
+          className="page-lead-grid mx-auto max-w-7xl gap-16 px-6 sm:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(340px,0.92fr)] lg:px-12"
+        >
           <div className="max-w-2xl">
             <p className="text-[0.68rem] uppercase tracking-[0.42em] text-white/50">
               The deck store
@@ -197,7 +201,7 @@ export default function DeckPage() {
         </ScrollReveal>
       </section>
 
-      <section className="px-6 pb-10 sm:px-8 lg:px-12">
+      <FloatingSection className="pb-12 sm:pb-14">
         <ScrollReveal className="mx-auto max-w-7xl">
           <div className="grid gap-12 border-t border-white/10 pt-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(320px,0.72fr)]">
             <div className="max-w-2xl">
@@ -311,9 +315,9 @@ export default function DeckPage() {
             </div>
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
           <SectionIntro
             eyebrow="Store overview"
@@ -333,9 +337,9 @@ export default function DeckPage() {
             ))}
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <SectionIntro
             eyebrow="What&apos;s included"
@@ -359,9 +363,9 @@ export default function DeckPage() {
             ))}
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] px-6 py-10 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
             <div>
@@ -397,13 +401,13 @@ export default function DeckPage() {
             </div>
           </div>
         </ScrollReveal>
-      </section>
+      </FloatingSection>
 
-      <section className="px-6 py-20 sm:px-8 lg:px-12">
+      <FloatingSection>
         <ScrollReveal>
           <WaitlistCard source="deck-page" />
         </ScrollReveal>
-      </section>
+      </FloatingSection>
     </MarketingPage>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense, type ReactNode } from "react";
 import { WaitlistFeedback } from "./form-feedback";
+import { HomeInteractiveField } from "./home-interactive-field";
 
 type NavKey = "home" | "about" | "cards" | "deck" | "contact" | "waitlist";
 
@@ -97,20 +98,43 @@ export function MarketingPage({
   showHeader = true,
 }: MarketingPageProps) {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+    <main className="relative min-h-screen overflow-x-hidden bg-black text-white">
       <BackgroundAura />
-      <div className="relative">
-        {showHeader ? <SiteHeader current={current} /> : null}
-        {children}
-        <Footer />
-      </div>
+      <HomeInteractiveField>
+        <div className="relative">
+          {showHeader ? (
+            <>
+              <SiteHeader current={current} />
+              <TopVeil />
+            </>
+          ) : null}
+          {children}
+          <Footer />
+        </div>
+      </HomeInteractiveField>
     </main>
+  );
+}
+
+export function FloatingSection({
+  className = "",
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <section
+      className={`floating-section px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14 ${className}`}
+    >
+      <div className="w-full">{children}</div>
+    </section>
   );
 }
 
 function SiteHeader({ current }: { current: NavKey }) {
   return (
-    <header className="sticky top-0 z-30">
+    <header className="site-header fixed inset-x-0 top-0 z-40">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:px-8 lg:px-12">
         <Link
           href="/"
@@ -166,6 +190,10 @@ function SiteHeader({ current }: { current: NavKey }) {
       </div>
     </header>
   );
+}
+
+function TopVeil() {
+  return <div aria-hidden="true" className="site-top-veil" />;
 }
 
 export function PageHero({
@@ -321,7 +349,7 @@ export function WaitlistCard({
 
 function Footer() {
   return (
-    <footer className="border-t border-white/8 px-6 py-8 sm:px-8 lg:px-12">
+    <footer className="mt-6 border-t border-white/8 px-6 py-8 sm:mt-10 sm:px-8 lg:px-12">
       <div className="mx-auto grid max-w-7xl gap-8 py-6 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)_minmax(0,0.8fr)]">
         <div className="max-w-sm">
           <p className="tracking-[0.26em] uppercase text-white/62">AeroTarot</p>
@@ -421,8 +449,8 @@ function BackgroundAura() {
     <div aria-hidden="true" className="pointer-events-none fixed inset-0">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(80,51,185,0.26),transparent_28%),radial-gradient(circle_at_15%_20%,rgba(205,160,86,0.13),transparent_18%),linear-gradient(180deg,#070709_0%,#050507_42%,#030304_100%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
-      <div className="absolute left-[8%] top-24 h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(249,211,134,0.18),transparent_70%)] blur-3xl" />
-      <div className="absolute right-[10%] top-[24rem] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(96,65,223,0.2),transparent_72%)] blur-3xl" />
+      <div className="background-aura-orb background-aura-orb-amber" />
+      <div className="background-aura-orb background-aura-orb-violet" />
     </div>
   );
 }
